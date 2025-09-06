@@ -1,0 +1,37 @@
+{
+  "name": "chimera-ai-neon",
+  "version": "1.0.0",
+  "description": "Chimera AI with Neon Database Integration - Ultra-fast, SOC2/GDPR Compliant",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build required for static site'",
+    "deploy": "netlify deploy --prod",
+    "init-db": "netlify functions:invoke database --querystring 'action=create'"
+  },
+  "dependencies": {
+    "@netlify/neon": "^0.1.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-lighthouse": "^4.0.0",
+    "netlify-cli": "^17.0.0"
+  },
+  "keywords": [
+    "chimera",
+    "ai",
+    "neon",
+    "database",
+    "postgresql",
+    "serverless",
+    "netlify",
+    "soc2",
+    "gdpr"
+  ],
+  "author": "Chimera AI Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chimera-ai/chimera-neon"
+  },
+  "homepage": "https://chimera-ai-io.com"
+}

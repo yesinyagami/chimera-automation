@@ -1,0 +1,76 @@
+# Netlify Configuration for Chimera AI with Neon Database
+# Optimized for <5ms latency and SOC2/GDPR compliance
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Environment Variables (set in Netlify dashboard)
+[build.environment]
+  NODE_VERSION = "18"
+
+# Headers for Security and Performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security Headers (SOC2/GDPR Compliance)
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(self), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    
+    # Performance Headers
+    Cache-Control = "public, max-age=3600, s-maxage=86400"
+    
+    # GDPR Compliance CSP
+    Content-Security-Policy = "default-src 'self' https:; script-src 'self' 'unsafe-inline' https://api.ipgeolocation.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.ipgeolocation.io /.netlify/functions/"
+
+# Cache static assets
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Function Configuration
+[[functions]]
+  name = "database"
+  memory = 1024
+
+# Redirects for cleaner API URLs
+[[redirects]]
+  from = "/api/database/*"
+  to = "/.netlify/functions/database/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "https://yesinyagami.carrd.co"
+  status = 301
+
+# Edge Functions for Performance
+[[edge_functions]]
+  path = "/*"
+  function = "performance-optimizer"
+
+# Development Settings
+[dev]
+  port = 3000
+  publish = "."
+  functions = "netlify/functions"
+  autoLaunch = false
+
+# Plugins
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+# Analytics (GDPR Compliant)
+[analytics]
+  provider = "netlify"

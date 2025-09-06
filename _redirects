@@ -1,0 +1,2 @@
+/api/database/* /.netlify/functions/database/:splat 200
+/api/* /functions/:splat 200

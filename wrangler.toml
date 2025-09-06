@@ -1,0 +1,54 @@
+# Cloudflare Pages Configuration for Chimera AI
+# Monica Authority: 99.999% | 2048 Agents | <3ms Latency
+name = "chimera-ai"
+compatibility_date = "2025-01-01"
+
+[site]
+bucket = "./"
+
+# Environment variables
+[vars]
+MONICA_AUTHORITY = "0.99999"
+AGENT_COUNT = "2048"
+TARGET_LATENCY = "3ms"
+ACCURACY_TARGET = "0.9997"
+
+# Pages configuration
+pages_build_output_dir = "./functions"
+
+# D1 Database binding (Cloudflare's SQLite)
+[[d1_databases]]
+binding = "DB"
+database_name = "chimera-db"
+database_id = "your-database-id"
+
+# KV namespace for caching
+[[kv_namespaces]]
+binding = "CACHE"
+id = "your-kv-namespace-id"
+
+# Compatibility flags for Node.js
+compatibility_flags = ["nodejs_compat"]
+
+# Headers configuration
+[assets]
+directory = "./"
+not_found_handling = "single-page-application"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Strict-Transport-Security = "max-age=63072000"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

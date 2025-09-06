@@ -41,3 +41,4 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+# Fixed at 1757162695

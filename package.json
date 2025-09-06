@@ -1,14 +1,14 @@
 {
   "name": "chimera-ai-platform",
   "version": "2.0.0",
-  "description": "Chimera AI Platform - Monica Authority 99.999% | 2048 Agents | <3ms Latency",
+  "description": "Chimera AI - Monica Authority 99.999%",
   "main": "index.html",
   "scripts": {
     "dev": "netlify dev",
-    "build": "echo 'Build completed - Chimera AI Ready'",
-    "test": "echo 'Tests passing with 99.97% accuracy'",
-    "deploy": "netlify deploy --prod",
-    "init-db": "netlify functions:invoke database --querystring 'action=create'"
+    "build": "echo 'Build completed'",
+    "test": "cypress run",
+    "cypress:open": "cypress open",
+    "deploy": "netlify deploy --prod"
   },
   "dependencies": {
     "@netlify/neon": "^0.1.0",
@@ -17,14 +17,11 @@
     "aws-sdk": "^2.1530.0"
   },
   "devDependencies": {
+    "cypress": "^13.6.2",
     "@netlify/plugin-lighthouse": "^4.0.0",
     "netlify-cli": "^17.0.0"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
-  "keywords": ["chimera", "ai", "neon", "monica", "2048-agents", "aws", "serverless"],
-  "author": "System Administrator - Monica AI",
-  "license": "MIT"
+    "node": ">=18.0.0"
+  }
 }
